@@ -1,0 +1,43 @@
+<div class="script-holder-main">
+
+  <app-scripts [scriptsList]="scriptsList"></app-scripts>
+</div>
+<div class="fixed-bottom">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+ <div class="bottom-form-holder">
+   <button  (click)="clearForm($event)" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+     Add
+   </button>
+ </div>
+</nav>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header hide">
+        <h5 class="modal-title hide" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input (keyup)="keyUpInput($event)" [(ngModel)] = "scriptName" value="{{scriptName}}" class="typeahead tt-input" type="text" placeholder="Script Name, Like Goo..." autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
+           <a><i (click)="addScript($event)" class="fa fa-plus-circle fa-4 add-icon" aria-hidden="true"></i></a>
+           <a><i class="fa fa-times fa-4 add-icon" aria-hidden="true"></i></a>
+
+
+        <app-suggestion (suggestionSelect)="suggestionSelect($event)" [scriptName]="scriptName"></app-suggestion>
+      </div>
+      <div class="modal-footer hide">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="addScript($event)" class="btn btn-primary">Add</button>
+        https://twitter.github.io/typeahead.js/examples/
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
