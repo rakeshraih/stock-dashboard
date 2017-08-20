@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Script } from '../scripts/script';
 import { HttpClient } from '@angular/common/http';
 import { ScriptsService } from '../scripts/scripts.service';
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,12 @@ export class HomeComponent implements OnInit {
   scriptName: String;
   scriptCode: String;
   scriptsList: any;
+  searching = '';
   constructor(private http: HttpClient, private scriptsService: ScriptsService) {
-    this.scriptName = 'test';
-    this.scriptCode = 'MSFT';
+    // this.scriptName = 'test';
+    // this.scriptCode = 'MSFT';
     this.scriptsList = [];
+    this.getScriptListFromLocal();
   }
 
   ngOnInit() {
@@ -30,6 +33,7 @@ export class HomeComponent implements OnInit {
 
   addScript(event) {
 
+    this.searching = 'search-request';
     if (this.scriptCode) {
       const script = new Script();
       script.code = this.scriptCode;
@@ -40,6 +44,7 @@ export class HomeComponent implements OnInit {
       // });
       this.scriptsList.push(script);
     }
+    this.clearForm();
   }
 
   suggestionSelect(suggestion: String) {
@@ -50,5 +55,13 @@ export class HomeComponent implements OnInit {
 
   clearForm() {
     this.scriptName = '';
+  }
+
+  getScriptListFromLocal() {
+    const data = localStorage.getItem('stock-dashboard');
+    if (data) {
+      const jsonData = JSON.parse(data);
+      this.scriptsList = jsonData;
+    }
   }
 }

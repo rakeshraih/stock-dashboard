@@ -42,3 +42,51 @@
   font-size: 20px;
   font-weight: bold;
 }
+.graph-holder{
+  display:none;
+}
+.position-center{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 40%;
+  top: 15%;
+
+  .graph-holder{
+    display: block;
+  }
+
+  .closeExpand{
+    display:block;
+  }
+
+  .icon-holder-close{
+    margin-top: 10px;
+  }
+}
+
+.position-center.grid-item--height2{
+  height: auto;
+}
+
+.closeExpand{
+  display:none;
+  a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 200;
+  }
+
+  a:hover{
+    font-weight: 400;
+  }
+}
+
+.red{
+  color: red;
+}
+
+.green{
+  color: green;
+}

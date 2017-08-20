@@ -41,13 +41,18 @@ export class SuggestionComponent implements OnInit, OnChanges {
   fomatDtata(crudeStr) {
 
     const str = crudeStr.split('\n');
+    const codeList = this.getScriptCodes();
 
     for ( const item of str){
-      if (!item) {
+      if (!item ) {
         continue;
       }
       const shortScript = item.split(';');
       const shortScript1 = shortScript[0].split('|');
+
+      if (codeList.indexOf(shortScript1[0].trim()) !== -1 ) {
+        continue;
+      }
 
       // this.suggestionList.push(shortScript1[1] + '( ' + shortScript1[0] + ')');
       if (this.suggestionList.length < 10 ) {
@@ -86,6 +91,20 @@ export class SuggestionComponent implements OnInit, OnChanges {
     //     // And access the body directly, which is typed as MyJsonData as requested.
     //     console.log(resp.body.someField);
     //   });
+  }
+
+  getScriptCodes() {
+
+    const data = localStorage.getItem('stock-dashboard');
+    let codeList = new Array();
+    if (data) {
+      const jsonData = JSON.parse(data);
+      for (let _i = 0; _i < jsonData.length; _i++) {
+        const script = jsonData[_i];
+        codeList.push(script.code.trim());
+      }
+    }
+    return codeList;
   }
 
 }

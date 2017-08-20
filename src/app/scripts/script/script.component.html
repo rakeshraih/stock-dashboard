@@ -1,23 +1,30 @@
-<div class="grid-item grid-item--height2 container-layout {{className}}">
-
+<div class="{{className}}">
+  <div class="closeExpand" style="float: right;"><a (click)="expandView($event)" href="">X</a></div>
   <div>{{script.name}}</div>
   <div class="script-current-quote">{{script.close}} <i class="fa fa-heart" aria-hidden="true"></i></div>
+  <div class="red"> {{ (script.previousClose - script.close).toPrecision(2)}} <span>|</span> {{(((100 * script.close)/script.previousClose) - 100).toPrecision(2)}} </div>
+
   <div class="high-low-container">
     <div><span>H :</span><span>{{script.high}}</span></div>
     <div><span>L :</span><span>{{script.low}}</span></div>
     <div><span>O :</span><span>{{script.open}}</span></div>
   </div>
   <div><span>V : {{script.volume}}</span></div>
-  <div><span>As of : {{script.lastRefreshed}}</span></div>
+
+  <app-scriptgraph [scriptCode]="script.code" class="graph-holder"></app-scriptgraph>
+
+
   <div class="icon-holder-close">
       <span>
+       <span class="last-refreshed"> {{script.lastRefreshed}} </span>
         <a class="hide" href="https://www.google.com/finance?q={{script.code}}" target="_blank"><i class="fa fa-google" aria-hidden="true"></i></a>
       <a href="http://www.nasdaq.com/symbol/{{script.code}}" target="_blank"><i class="fa fa-line-chart" aria-hidden="true"></i></a>
      </span>
 
     <span class="closeIcon">
-      <i class="fa fa-expand" aria-hidden="true"></i>
-      <a (click)="closeTheScript($event,script.code)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+      <a (click)="expandView($event)" href=""><i  class="fa fa-expand" aria-hidden="true"></i></a>
+      <a (click)="closeTheScript($event,script.code)" href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
     </span>
   </div>
+
 </div>

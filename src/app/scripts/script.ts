@@ -8,4 +8,6 @@ export class Script {
   close: number;
   volume: number;
   lastRefreshed: String;
+  previousClose: number;
+
 }

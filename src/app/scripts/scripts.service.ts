@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs/Rx';
 
 import { Script } from './script';
+import {CommonUtilityService} from '../common-utility.service';
 
 @Injectable()
 export class ScriptsService {
 
   script: Script;
   showChild = true;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private common: CommonUtilityService) {
     this.script = new Script();
   }
   getScriptDetails(data, script: Script) {
@@ -18,7 +19,8 @@ export class ScriptsService {
     script.high = parseFloat(data['Time Series (Daily)'][Object.keys(data['Time Series (Daily)'])[0]]['2. high']);
     script.low = parseFloat(data['Time Series (Daily)'][Object.keys(data['Time Series (Daily)'])[0]]['3. low']);
     script.volume = parseFloat(data['Time Series (Daily)'][Object.keys(data['Time Series (Daily)'])[0]]['5. volume']);
-    script.lastRefreshed = data['Meta Data']['3. Last Refreshed'];
+    script.lastRefreshed = this.common.formatAMPM(new Date());
+    script.previousClose = parseFloat(data['Time Series (Daily)'][Object.keys(data['Time Series (Daily)'])[1]]['4. close']);
     return script;
   }
 
@@ -26,6 +28,16 @@ export class ScriptsService {
     return this.http.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + scriptCode.trim() + '&interval=1min&apikey=37LTWXNDDNGGT2Z5')
       .map(this.extractData)
       .catch(this.handleError);
+  }
+
+  getDataForGraph(scriptCode: String): Observable<any> {
+    return this.http.get('  https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + scriptCode.trim() + '&interval=5min&outputsize=full&apikey=37LTWXNDDNGGT2Z5')
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  getGraphData(scriptCode: String) {
+    // 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=15min&outputsize=full&apikey=demo'
   }
 
   private extractData(res: Response) {

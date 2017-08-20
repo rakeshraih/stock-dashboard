@@ -1,0 +1,12 @@
+<div>
+
+  <div class="different-chart">
+    <a href="#" (click)="changeChartData('price', $event)">Price</a> <a (click)="changeChartData('volume')" href="#">Volume</a>
+  </div>
+  <hr/>
+  <div class="chart-container" style="position: relative; height:250vh;">
+    <canvas id="{{scriptCode}}"></canvas>
+  </div>
+
+
+</div>
