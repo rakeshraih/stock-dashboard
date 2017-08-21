@@ -1,4 +1,7 @@
-import {Component, Input, OnInit, OnChanges, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, ComponentRef, OnDestroy } from '@angular/core';
+import {
+  Component, Input, OnInit, OnChanges, ViewChild, ViewContainerRef, ComponentFactoryResolver, ComponentFactory,
+  ComponentRef, OnDestroy, Output, EventEmitter
+} from '@angular/core';
 import { ScriptComponent} from './script/script.component';
 @Component({
   selector: 'app-scripts',
@@ -9,6 +12,8 @@ export class ScriptsComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() scriptsList;
   @ViewChild('scriptContainer', { read: ViewContainerRef }) container;
+  @Output() showOverLay = new EventEmitter();
+
   componentRef: ComponentRef<any>;
   showChild = true;
   constructor(private resolver: ComponentFactoryResolver) {}
@@ -30,4 +35,7 @@ export class ScriptsComponent implements OnInit, OnChanges, OnDestroy {
     this.componentRef.destroy();
   }
 
+  showOverLayParent(showOverLay: boolean) {
+    this.showOverLay.emit(showOverLay);
+  }
 }

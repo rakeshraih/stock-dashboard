@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   scriptCode: String;
   scriptsList: any;
   searching = '';
+  overLayClass = '';
   constructor(private http: HttpClient, private scriptsService: ScriptsService) {
     // this.scriptName = 'test';
     // this.scriptCode = 'MSFT';
@@ -68,5 +69,9 @@ export class HomeComponent implements OnInit {
   randomize($event) {
     this.scriptsList = [];
     this.getScriptListFromLocal();
+  }
+
+  showOverLay(show: boolean) {
+   this.overLayClass = show ? 'overlay' : '';
   }
 }

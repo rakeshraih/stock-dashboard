@@ -14,6 +14,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
 
   @Input() script: Script;
   @Output() close = new EventEmitter();
+  @Output() showOverLay = new EventEmitter();
 
   className: string;
    classList = ['grid-item--width2 grid-item--height2', 'grid-item--width3', 'grid-item--height2', 'grid-item--width2 grid-item--height3', 'grid-item', 'grid-item--width2'];
@@ -58,9 +59,11 @@ export class ScriptComponent implements OnInit, OnDestroy {
    }
 
    expandView($event) {
-      this.className = this.className.match('position-center') != null ? this.className.replace('position-center','') : this.className + ' position-center';
+      const expandView = this.className.match('position-center') != null;
+      this.className = expandView ? this.className.replace('position-center','') : this.className + ' position-center';
+     this.showOverLay.emit(!expandView);
       $event.preventDefault();
-  }
+   }
 
    public chartClicked(e:any):void {
      console.log(e);
