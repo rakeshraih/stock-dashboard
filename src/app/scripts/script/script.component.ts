@@ -19,6 +19,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
   classList = ['grid-item--width3', 'grid-item--width2', 'grid-item--height2'];
   intervalFn = Observable.interval(5000);
   timer: any;
+  classPriceChnage: String = '';
 
   constructor(private http: Http, private scriptsService: ScriptsService) {
     const randomClass = Math.round(Math.random() * 10) % 2;
@@ -35,8 +36,9 @@ export class ScriptComponent implements OnInit, OnDestroy {
     //   this.getScript();
     // }, 5000);
 
+    this.classPriceChnage =  ( this.script.previousClose - this.script.close ) > 0 ? 'green' : 'red';
     this.addLocalStorageScript();
-  }
+    }
     ngOnDestroy() {
 
     }

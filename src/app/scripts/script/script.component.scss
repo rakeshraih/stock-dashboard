@@ -64,6 +64,10 @@
   .icon-holder-close{
     margin-top: 10px;
   }
+
+  .script-top {
+    position: relative;
+  }
 }
 
 .position-center.grid-item--height2{
@@ -81,6 +85,7 @@
   a:hover{
     font-weight: 400;
   }
+
 }
 
 .red{
@@ -90,3 +95,13 @@
 .green{
   color: green;
 }
+
+.script-top{
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  .last-refreshed{
+    font-size: 10px;
+  }
+}
+

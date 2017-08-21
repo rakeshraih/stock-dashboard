@@ -31,7 +31,7 @@ export class ScriptsService {
   }
 
   getDataForGraph(scriptCode: String): Observable<any> {
-    return this.http.get('  https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + scriptCode.trim() + '&interval=5min&outputsize=full&apikey=37LTWXNDDNGGT2Z5')
+    return this.http.get('  https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + scriptCode.trim() + '&interval=1min&outputsize=full&apikey=37LTWXNDDNGGT2Z5')
       .map(this.extractData)
       .catch(this.handleError);
   }

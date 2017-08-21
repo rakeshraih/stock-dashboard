@@ -20,11 +20,13 @@ export class ScriptgraphComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loadGraph();
+  }
+
+  loadGraph() {
     this.scriptService.getDataForGraph(this.scriptCode).subscribe(data => {
       this.createChrat(this.processData(data));
     });
-
-
   }
 
   public chartClicked(e:any):void {
@@ -38,7 +40,7 @@ export class ScriptgraphComponent implements OnInit {
   processData(data) {
 
     let dateStr = '2017-08-18 16:00:00'
-    const ketMin='Time Series (5min)';
+    const ketMin='Time Series (1min)';
     dateStr = dateStr.split(' ')[0].trim();
     const dataMAp = Object.keys(data[ketMin]);
     let closeArray = new Array();
@@ -60,6 +62,10 @@ export class ScriptgraphComponent implements OnInit {
 
   }
 
+  refreshGraph(){
+
+  }
+
   changeChartData (type: String, $event) {
     this.graphData = type === 'volume' ? this.volumeData : this.closingData;
     this.createChrat({});
@@ -68,6 +74,7 @@ export class ScriptgraphComponent implements OnInit {
 
   createChrat(data) {
 
+    //this.timeData.reverse();
     let ctx = document.getElementById(this.scriptCode);
     let myChart = new Chart(ctx, {
       type: 'line',
@@ -86,7 +93,7 @@ export class ScriptgraphComponent implements OnInit {
             fontColor: 'rgb(255, 99, 132)'
           }
         },
-        labels: this.timeData.reverse(),
+        labels: this.timeData,
         datasets: [{
           label: '',
           data: this.graphData.reverse(),
@@ -106,7 +113,8 @@ export class ScriptgraphComponent implements OnInit {
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)'
           ],
-          borderWidth: 1
+          borderWidth: 1,
+          radius: 0
         }]
       },
       options: {
@@ -114,7 +122,8 @@ export class ScriptgraphComponent implements OnInit {
           yAxes: [{
             ticks: {
               beginAtZero: false,
-              // stepSize: 0.10
+              // stepSize: 0.10,
+              //maxTicksLimit: 5
             }
           }]
         },

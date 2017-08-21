@@ -1,7 +1,10 @@
 <div>
 
   <div class="different-chart">
-    <a href="#" (click)="changeChartData('price', $event)">Price</a> <a (click)="changeChartData('volume')" href="#">Volume</a>
+    <a href="#" (click)="changeChartData('price', $event)">Price</a> <span class="divider">|</span><a (click)="changeChartData('volume')" href="#">Volume</a>
+
+    <a (click)="loadGraph()" href="#"><i class="fa fa-refresh" style='float: right;' aria-hidden="true"></i></a>
+
   </div>
   <hr/>
   <div class="chart-container" style="position: relative; height:250vh;">

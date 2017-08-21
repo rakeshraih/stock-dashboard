@@ -1,8 +1,15 @@
 <div class="{{className}}">
-  <div class="closeExpand" style="float: right;"><a (click)="expandView($event)" href="">X</a></div>
+  <div class="script-top">
+    <div style="text-align: left;">
+      <span class="last-refreshed"> {{script.lastRefreshed}} </span>
+  </div>
+    <div class="closeExpand">
+      <a (click)="expandView($event)" href="">X</a>
+    </div>
+  </div>
   <div>{{script.name}}</div>
   <div class="script-current-quote">{{script.close}} <i class="fa fa-heart" aria-hidden="true"></i></div>
-  <div class="red"> {{ (script.previousClose - script.close).toPrecision(2)}} <span>|</span> {{(((100 * script.close)/script.previousClose) - 100).toPrecision(2)}} </div>
+  <div class="{{classPriceChnage}}"> {{ (script.previousClose - script.close).toPrecision(2)}} <span>|</span> {{(((100 * script.close)/script.previousClose) - 100).toPrecision(2)}}%</div>
 
   <div class="high-low-container">
     <div><span>H :</span><span>{{script.high}}</span></div>
@@ -16,13 +23,12 @@
 
   <div class="icon-holder-close">
       <span>
-       <span class="last-refreshed"> {{script.lastRefreshed}} </span>
         <a class="hide" href="https://www.google.com/finance?q={{script.code}}" target="_blank"><i class="fa fa-google" aria-hidden="true"></i></a>
-      <a href="http://www.nasdaq.com/symbol/{{script.code}}" target="_blank"><i class="fa fa-line-chart" aria-hidden="true"></i></a>
+      <a href="http://www.nasdaq.com/symbol/{{script.code}}" target="_blank"><i class="fa fa fa-external-link" aria-hidden="true"></i></a>
      </span>
 
     <span class="closeIcon">
-      <a (click)="expandView($event)" href=""><i  class="fa fa-expand" aria-hidden="true"></i></a>
+      <a (click)="expandView($event)" href=""><i  class="fa fa-line-chart" aria-hidden="true"></i></a>
       <a (click)="closeTheScript($event,script.code)" href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
     </span>
   </div>

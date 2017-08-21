@@ -12,6 +12,8 @@ import { ScriptsComponent } from './scripts/scripts.component';
 import { ScriptComponent } from './scripts/script/script.component';
 import { HttpModule } from '@angular/http';
 import { ScriptsService } from './scripts/scripts.service';
+import { ScriptgraphComponent } from './scriptgraph/scriptgraph.component';
+import { CommonUtilityService } from './common-utility.service';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,13 @@ import { ScriptsService } from './scripts/scripts.service';
     HomeComponent,
     SuggestionComponent,
     ScriptsComponent,
-    ScriptComponent
+    ScriptComponent,
+    ScriptgraphComponent
   ],
   imports: [
     BrowserModule, BrowserAnimationsModule, FormsModule, HttpClientModule, HttpModule
   ],
-  providers: [ ScriptsService ],
+  providers: [ ScriptsService, CommonUtilityService ],
   bootstrap: [AppComponent],
   entryComponents: [ ScriptComponent ]
 })
