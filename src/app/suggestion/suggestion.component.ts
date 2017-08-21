@@ -68,7 +68,7 @@ export class SuggestionComponent implements OnInit, OnChanges {
   getDataFromNasdaq() {
 
 
-    this.http.get('http://www.nasdaq.com/aspx/symbolnamesearch.aspx?q=' + this.scriptName, {responseType: 'text'}).subscribe(
+    this.http.get('https://www.nasdaq.com/aspx/symbolnamesearch.aspx?q=' + this.scriptName, {responseType: 'text'}).subscribe(
 
       // Successful responses call the first callback.
       data => {
