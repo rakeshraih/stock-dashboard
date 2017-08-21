@@ -3,7 +3,6 @@
   height: 120px;
   float: left;
   background: white;
-  border: 2px solid #D26;
 }
 
 .grid-item--width2 { width: 320px; }
@@ -11,8 +10,8 @@
 .grid-item--width4 { width: 640px; }
 
 .grid-item--height2 { height: 200px; }
-.grid-item--height3 { height: 260px; }
-.grid-item--height4 { height: 360px; }
+.grid-item--height3 { height: 200px; }
+.grid-item--height4 { height: 200px; }
 
 .container-layout{
 
@@ -22,7 +21,10 @@
   text-align: center;
   font-size: 16px;
   padding: 10px;
-  margin-right: 1px;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 3px 5px #888888;
 }
 
 .high-low-container{
@@ -68,6 +70,18 @@
   .script-top {
     position: relative;
   }
+
+  .allign-center{
+    transform: none;
+  }
+
+  .overlay {
+    display: block;
+  }
+
+  .script-top{
+    z-index: 15;
+  }
 }
 
 .position-center.grid-item--height2{
@@ -105,3 +119,24 @@
   }
 }
 
+//.allign-center{
+//  position: relative;
+//  top: 50%;
+//  -webkit-transform: translateY(-50%);
+//  -ms-transform: translateY(-50%);
+//  transform: translateY(-50%);
+//}
+
+.overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}

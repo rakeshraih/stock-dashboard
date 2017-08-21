@@ -16,13 +16,13 @@ export class ScriptComponent implements OnInit, OnDestroy {
   @Output() close = new EventEmitter();
 
   className: string;
-  classList = ['grid-item--width3', 'grid-item--width2', 'grid-item--height2'];
+   classList = ['grid-item--width2 grid-item--height2', 'grid-item--width3', 'grid-item--height2', 'grid-item--width2 grid-item--height3', 'grid-item', 'grid-item--width2'];
   intervalFn = Observable.interval(5000);
   timer: any;
   classPriceChnage: String = '';
 
   constructor(private http: Http, private scriptsService: ScriptsService) {
-    const randomClass = Math.round(Math.random() * 10) % 2;
+    const randomClass = Math.round(Math.random() * 10) % 7;
     this.className = 'grid-item grid-item--height2 container-layout ' + this.classList[randomClass];
   }
   ngOnInit() {
@@ -32,11 +32,11 @@ export class ScriptComponent implements OnInit, OnDestroy {
     //   this.getScript()
     // );
 
-    // this.timer = setInterval(_ => {
-    //   this.getScript();
-    // }, 5000);
+    this.timer = setInterval(_ => {
+      this.getScript();
+    }, 5000);
 
-    this.classPriceChnage =  ( this.script.previousClose - this.script.close ) > 0 ? 'green' : 'red';
+    this.classPriceChnage =  ( this.script.previousClose < this.script.close ) ? 'green' : 'red';
     this.addLocalStorageScript();
     }
     ngOnDestroy() {
@@ -44,7 +44,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
     }
 
    closeTheScript(event, scriptCode) {
-     event.target.parentElement.parentElement.parentElement.parentElement.remove();
+     event.target.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
      clearInterval(this.timer);
      //this.close.emit(null);
      this.deleteLocalStorageScript();

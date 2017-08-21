@@ -61,7 +61,12 @@ export class HomeComponent implements OnInit {
     const data = localStorage.getItem('stock-dashboard');
     if (data) {
       const jsonData = JSON.parse(data);
-      this.scriptsList = jsonData;
+      this.scriptsList = ( jsonData.length > 0 ) ? jsonData :  [{'code' : 'AAPL', 'name' : 'Apple(AAPL)'}, {'code' : 'GOOG', 'name' : 'Alphabet(GOOG)'}, {'code' : 'COST', 'name' : 'Costco(COST)'}, {'code' : 'AMZN', 'name' : 'Amazon.com,(AMZN)'}, {'code' : 'TSLA', 'name' : 'Tesla,(TSLA)'}, {'code' : 'F', 'name' : 'Ford(F)'}, {'code' : 'V', 'name' : 'Visa(V)'}, {'code' : 'TWTR', 'name' : 'Twitter,(TWTR)'}, {'code' : 'NFLX', 'name' : 'Netflix,(NFLX)'}];
     }
+  }
+
+  randomize($event) {
+    this.scriptsList = [];
+    this.getScriptListFromLocal();
   }
 }

@@ -39,7 +39,7 @@ export class ScriptgraphComponent implements OnInit {
 
   processData(data) {
 
-    let dateStr = '2017-08-18 16:00:00'
+    let dateStr = '2017-08-21 16:00:00'
     const ketMin='Time Series (1min)';
     dateStr = dateStr.split(' ')[0].trim();
     const dataMAp = Object.keys(data[ketMin]);

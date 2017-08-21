@@ -1,15 +1,16 @@
 <div class="{{className}}">
   <div class="script-top">
     <div style="text-align: left;">
-      <span class="last-refreshed"> {{script.lastRefreshed}} </span>
+      <span class="last-refreshed hide"> {{script.lastRefreshed}} </span>
   </div>
     <div class="closeExpand">
       <a (click)="expandView($event)" href="">X</a>
     </div>
   </div>
+  <div class="allign-center">
   <div>{{script.name}}</div>
-  <div class="script-current-quote">{{script.close}} <i class="fa fa-heart" aria-hidden="true"></i></div>
-  <div class="{{classPriceChnage}}"> {{ (script.previousClose - script.close).toPrecision(2)}} <span>|</span> {{(((100 * script.close)/script.previousClose) - 100).toPrecision(2)}}%</div>
+  <div class="script-current-quote {{script.previousClose > script.close ? 'red' : 'green' }}">{{script.close}} <i class="fa fa-heart" aria-hidden="true"></i></div>
+  <div class="{{script.previousClose > script.close ? 'red' : 'green' }}"> {{ ( script.close - script.previousClose).toPrecision(2)}} <span>|</span> {{(((100 * script.close)/script.previousClose) - 100).toPrecision(2)}}%</div>
 
   <div class="high-low-container">
     <div><span>H :</span><span>{{script.high}}</span></div>
@@ -32,5 +33,7 @@
       <a (click)="closeTheScript($event,script.code)" href=""><i class="fa fa-trash-o" aria-hidden="true"></i></a>
     </span>
   </div>
+</div>
+  <div class="overlay"></div>
 
 </div>
