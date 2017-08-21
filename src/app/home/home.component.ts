@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
       // });
       this.scriptsList.push(script);
     }
-    this.clearForm();
+    this.clearForm(event);
   }
 
   suggestionSelect(suggestion: String) {
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
     this.scriptName = scriptData[1];
   }
 
-  clearForm() {
+  clearForm($event) {
     this.scriptName = '';
   }
 

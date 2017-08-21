@@ -29,7 +29,6 @@ import { CommonUtilityService } from './common-utility.service';
     BrowserModule, BrowserAnimationsModule, FormsModule, HttpClientModule, HttpModule
   ],
   providers: [ ScriptsService, CommonUtilityService ],
-  bootstrap: [AppComponent],
-  entryComponents: [ ScriptComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
