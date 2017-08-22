@@ -13,6 +13,7 @@ export class ScriptsComponent implements OnInit, OnChanges, OnDestroy {
   @Input() scriptsList;
   @ViewChild('scriptContainer', { read: ViewContainerRef }) container;
   @Output() showOverLay = new EventEmitter();
+  @Output() lastRefreshedToParent = new EventEmitter();
 
   componentRef: ComponentRef<any>;
   showChild = true;
@@ -37,5 +38,9 @@ export class ScriptsComponent implements OnInit, OnChanges, OnDestroy {
 
   showOverLayParent(showOverLay: boolean) {
     this.showOverLay.emit(showOverLay);
+  }
+
+  lastRefreshedEvent(timeStamp: String) {
+    this.lastRefreshedToParent.emit(timeStamp);
   }
 }

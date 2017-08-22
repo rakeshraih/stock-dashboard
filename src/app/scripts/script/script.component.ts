@@ -15,6 +15,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
   @Input() script: Script;
   @Output() close = new EventEmitter();
   @Output() showOverLay = new EventEmitter();
+  @Output() lastRefreshedToParent = new EventEmitter();
 
   className: string;
    classList = ['grid-item--width2 grid-item--height2', 'grid-item--width3', 'grid-item--height2', 'grid-item--width2 grid-item--height3', 'grid-item', 'grid-item--width2'];
@@ -55,6 +56,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
    getScript() {
      this.scriptsService.getData(this.script.code).subscribe(data => {
        this.script = this.scriptsService.getScriptDetails(data, this.script);
+       this.lastRefreshedToParent.emit( this.script.lastRefreshed);
      });
    }
 
@@ -76,7 +78,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
    addLocalStorageScript() {
      const data = localStorage.getItem('stock-dashboard');
      let jsonData = new Array();
-     const script = {'code': this.script.code.trim(), 'name' : this.script.name.trim()}
+     const script = {'code': this.script.code.trim(), 'name' : this.script.name.trim(), 'scriptFullName' : this.script.scriptFullName}
 
      if (this.checkDataExist() !== -1) {
        return ;

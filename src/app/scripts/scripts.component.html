@@ -1,6 +1,6 @@
 <div class="grid">
-  <div #scriptContainer class="" *ngFor="let script of scriptsList">
-    <app-script *ngIf="showChild" (close)="showChild = false" (showOverLay)="showOverLayParent($event)" [script]="script"></app-script>
+  <div #scriptContainer class="" *ngFor="let script of scriptsList" >
+    <app-script *ngIf="showChild" (close)="showChild = false" (showOverLay)="showOverLayParent($event)" (lastRefreshedToParent)="lastRefreshedEvent($event)" [script]="script"></app-script>
   </div>
   <!--<div class="grid-item"></div>-->
   <!--<div class="grid-item grid-item&#45;&#45;width2 grid-item&#45;&#45;height2"></div>-->

@@ -8,16 +8,16 @@
     </div>
   </div>
   <div class="allign-center">
-  <div>{{script.name}}</div>
+  <div class="script-title"><span class="display-small-only">{{script.name}}</span><span class="display-large-only">{{script.scriptFullName}}({{script.code}})</span></div>
   <div class="script-current-quote {{script.previousClose > script.close ? 'red' : 'green' }}">{{script.close}} <i class="fa fa-heart" aria-hidden="true"></i></div>
   <div class="{{script.previousClose > script.close ? 'red' : 'green' }}"> {{ ( script.close - script.previousClose).toPrecision(2)}} <span>|</span> {{(((100 * script.close)/script.previousClose) - 100).toPrecision(2)}}%</div>
 
   <div class="high-low-container">
-    <div><span>H :</span><span>{{script.high}}</span></div>
-    <div><span>L :</span><span>{{script.low}}</span></div>
-    <div><span>O :</span><span>{{script.open}}</span></div>
+    <div><span>High :</span><span>{{script.high}}</span></div>
+    <div><span>Low :</span><span>{{script.low}}</span></div>
+    <div class="display-large-only"><span>Open :</span><span>{{script.open}}</span></div>
   </div>
-  <div><span>V : {{script.volume}}</span></div>
+  <div class="display-large-only"><span>Volume : {{script.volume}}</span></div>
 
   <app-scriptgraph [scriptCode]="script.code" class="graph-holder"></app-scriptgraph>
 

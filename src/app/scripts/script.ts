@@ -9,5 +9,6 @@ export class Script {
   volume: number;
   lastRefreshed: String;
   previousClose: number;
+  scriptFullName: String;
 
 }
