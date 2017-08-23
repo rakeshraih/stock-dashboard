@@ -93,7 +93,7 @@ export class ScriptgraphComponent implements OnInit {
             fontColor: 'rgb(255, 99, 132)'
           }
         },
-        labels: this.timeData,
+        labels: this.timeData.reverse(),
         datasets: [{
           label: '',
           data: this.graphData.reverse(),

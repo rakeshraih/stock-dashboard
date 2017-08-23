@@ -37,7 +37,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
 
     this.timer = setInterval(_ => {
       if ( this.pageVisible) {this.getScript(); }
-    }, 5000);
+    }, 60000);
 
     this.classPriceChnage =  ( this.script.previousClose < this.script.close ) ? 'green' : 'red';
     this.addLocalStorageScript();

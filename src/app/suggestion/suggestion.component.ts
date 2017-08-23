@@ -39,25 +39,23 @@ export class SuggestionComponent implements OnInit, OnChanges {
     this.suggestionSelect.emit(event.target.textContent);
   }
 
-  fomatDtata(crudeStr) {
+  formatDtata(scriptList: String[]) {
 
-    const str = crudeStr.split('\n');
     const codeList = this.getScriptCodes();
 
-    for ( const item of str){
+    for ( const item of scriptList){
       if (!item ) {
         continue;
       }
-      const shortScript = item.split(';');
-      const shortScript1 = shortScript[0].split('|');
+      const scriptName = item.replace('|', ' | ');
+      const scriptCode = scriptName.split('|');
 
-      if (codeList.indexOf(shortScript1[0].trim()) !== -1 ) {
+      if (codeList.indexOf(scriptCode[0].trim()) !== -1 ) {
         continue;
       }
 
-      // this.suggestionList.push(shortScript1[1] + '( ' + shortScript1[0] + ')');
       if (this.suggestionList.length < 10 ) {
-        this.suggestionList.push(shortScript[0]);
+        this.suggestionList.push(scriptName);
       }
 
     }
@@ -68,20 +66,32 @@ export class SuggestionComponent implements OnInit, OnChanges {
 
   getDataFromNasdaq() {
 
+    const data: String[] = [];
+    this.suggestionList = [];
 
-    this.http.get('http://www.nasdaq.com/aspx/symbolnamesearch.aspx?q=' + this.scriptName, {responseType: 'text'}).subscribe(
+    for (const str of ScriptList){
+      const name = str.split('|')[1];
 
-      // Successful responses call the first callback.
-      data => {
-        if (data) {
-          this.fomatDtata(data);
-        }
-      },
-      // Errors will call this callback instead:
-      err => {
-        console.log('Something went wrong!');
+      if ( name.toLowerCase().startsWith(this.scriptName.toLowerCase())) {
+           data.push(str);
       }
-    );
+    }
+
+    this.formatDtata(data);
+
+    // this.http.get('http://www.nasdaq.com/aspx/symbolnamesearch.aspx?q=' + this.scriptName, {responseType: 'text'}).subscribe(
+    //
+    //   // Successful responses call the first callback.
+    //   data => {
+    //     if (data) {
+    //       this.fomatDtata(data);
+    //     }
+    //   },
+    //   // Errors will call this callback instead:
+    //   err => {
+    //     console.log('Something went wrong!');
+    //   }
+    // );
 
     // this.http
     //   .get<MyJsonData>('http://www.nasdaq.com/aspx/symbolnamesearch.aspx?q=' + this.scriptName, {observe: 'response'})
@@ -97,7 +107,7 @@ export class SuggestionComponent implements OnInit, OnChanges {
   getScriptCodes() {
 
     const data = localStorage.getItem('stock-dashboard');
-    let codeList = new Array();
+    const codeList = new Array();
     if (data) {
       const jsonData = JSON.parse(data);
       for (let _i = 0; _i < jsonData.length; _i++) {
