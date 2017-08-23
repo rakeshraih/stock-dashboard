@@ -22,6 +22,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
   intervalFn = Observable.interval(5000);
   timer: any;
   classPriceChnage: String = '';
+  pageVisible: Boolean = true;
 
   constructor(private http: Http, private scriptsService: ScriptsService) {
     const randomClass = Math.round(Math.random() * 10) % 7;
@@ -35,11 +36,19 @@ export class ScriptComponent implements OnInit, OnDestroy {
     // );
 
     this.timer = setInterval(_ => {
-      this.getScript();
+      if ( this.pageVisible) {this.getScript(); }
     }, 5000);
 
     this.classPriceChnage =  ( this.script.previousClose < this.script.close ) ? 'green' : 'red';
     this.addLocalStorageScript();
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        this.pageVisible = false;
+      } else {
+        this.pageVisible = true;
+      }
+    });
     }
     ngOnDestroy() {
 

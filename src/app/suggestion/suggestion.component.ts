@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { ScriptList } from './scriptMetadata';
 
 @Component({
   selector: 'app-suggestion',

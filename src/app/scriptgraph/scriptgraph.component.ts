@@ -38,10 +38,10 @@ export class ScriptgraphComponent implements OnInit {
   }
 
   processData(data) {
-
-    let dateStr = '2017-08-21 16:00:00'
+    const date = new Date();
+    let dateStr = date.getFullYear() + '-' + (date.getMonth() < 9 ? '0' : '') + (date.getMonth() + 1) + '-' + date.getDate();
     const ketMin='Time Series (1min)';
-    dateStr = dateStr.split(' ')[0].trim();
+    // dateStr = dateStr.split(' ')[0].trim();
     const dataMAp = Object.keys(data[ketMin]);
     let closeArray = new Array();
     let timeArray = new Array();

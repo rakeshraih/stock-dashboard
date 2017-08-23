@@ -1,6 +1,7 @@
 .grid {
   background: #E8E8E8;
   //smax-width: 1200px;
+  padding-right: 20px;
 }
 
 /* clearfix */
@@ -49,4 +50,12 @@
 .icon-holder-close{
   display: flex;
   justify-content: space-between;
+}
+
+
+@media only screen and (max-device-width: 480px) {
+  .grid-item--width2 { width: 100%; }
+  .grid-item--width3 { width: 100%; }
+  .grid-item--width4 { width: 100%; }
+
 }
