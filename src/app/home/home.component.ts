@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   searching = '';
   overLayClass = false;
   lastRefreshed: String = '';
+  demoTick: Boolean = false;
   constructor(private http: HttpClient, private scriptsService: ScriptsService, private common: CommonUtilityService) {
     // this.scriptName = 'test';
     // this.scriptCode = 'MSFT';
@@ -83,5 +84,33 @@ export class HomeComponent implements OnInit {
 
   lastRefreshedTime(timeStamp: String) {
     this.lastRefreshed = timeStamp;
+  }
+
+  keyEntered(event) {
+
+    if (event.keyCode === 40) {
+
+      if (document.getElementsByClassName('tt-suggestion').length > 0) {
+
+        if (document.getElementsByClassName('selection-highlight').length === 0) {
+          document.getElementsByClassName('tt-suggestion')[0].classList.add('selection-highlight');
+        }else {
+          document.getElementsByClassName('tt-suggestion')[0].nextElementSibling.classList.add('selection-highlight');
+          document.getElementsByClassName('selection-highlight')[0].classList.remove('selection-highlight');
+        }
+
+      }
+
+
+    }else if (event.keyCode === 38) {
+
+      event.currentTarget.classList.remove('selection-highlight');
+      event.currentTarget.prev().classList.add('selection-highlight');
+
+    }else if (event.keyCode === 13) {
+      this.suggestionSelect(document.getElementsByClassName('selection-highlight')[0].firstElementChild.innerHTML);
+    }
+
+    //event.preventDefault();
   }
 }

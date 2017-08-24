@@ -21,6 +21,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
    classList = ['grid-item--width2 grid-item--height2', 'grid-item--width3', 'grid-item--height2', 'grid-item--width2 grid-item--height3', 'grid-item', 'grid-item--width2'];
   intervalFn = Observable.interval(5000);
   timer: any;
+  timerDummy: any;
   classPriceChnage: String = '';
   pageVisible: Boolean = true;
 
@@ -38,6 +39,19 @@ export class ScriptComponent implements OnInit, OnDestroy {
     this.timer = setInterval(_ => {
       if ( this.pageVisible) {this.getScript(); }
     }, 60000);
+
+    // this.timerDummy = setInterval(_ => {
+    //   if ( this.pageVisible && (Math.random() < 0.5 ? true : false)) {
+    //     const addSubstract = Math.random() < 0.5 ? true : false;
+    //     const randomNumber = (this.script.high - this.script.low) / 20;
+    //     this.script.close = addSubstract ? this.script.close - randomNumber : this.script.close + randomNumber;
+    //     this.script.high = this.script.high < this.script.close ? this.script.close : this.script.high;
+    //     this.script.low = this.script.low > this.script.close ? this.script.close : this.script.high;
+    //     const volume = Math.random() < 0.5 ? (this.script.close * 1000) + this.script.volume : this.script.volume - (this.script.close * 1000);
+    //     this.script.volume = Math.round(volume);
+    //   }
+    // }, 1000);
+
 
     this.classPriceChnage =  ( this.script.previousClose < this.script.close ) ? 'green' : 'red';
     this.addLocalStorageScript();
@@ -144,7 +158,6 @@ export class ScriptComponent implements OnInit, OnDestroy {
    }
 
    allowDrop(ev) {
-     //alert(1);
      ev.preventDefault();
    }
 }

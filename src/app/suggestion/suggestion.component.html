@@ -1,5 +1,5 @@
 <div class="tt-menu" [style.display]="(showSuggestion ? 'block' : 'none')" style="position: absolute; top: 100%; left: 0px; z-index: 100;">
   <div class="tt-dataset tt-dataset-states" *ngFor="let str of suggestionList">
-    <div class="tt-suggestion tt-selectable script-text" (click)="selectSuggestion($event)"><strong class="tt-highlight">{{str}}</strong></div>
+    <div class="tt-suggestion tt-selectable script-text" (mouseenter)="addHighLight($event, true)" (mouseleave)="addHighLight($event, false)"  (click)="selectSuggestion($event)"><strong class="tt-highlight">{{str}}</strong></div>
   </div>
 </div>

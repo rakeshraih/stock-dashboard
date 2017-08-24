@@ -18,6 +18,9 @@
 
    <a href="#" (click)="randomize($event)"><i class="fa fa-random random-icon" aria-hidden="true"></i></a>
    <span>Last Refreshed: {{lastRefreshed}}</span>
+   <!--<input type="checkbox" (click)="!demoTick" ([demoTick]) = "demoTick" checked="(demoTick)">-->
+
+
  </div>
 </nav>
 </div>
@@ -33,7 +36,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <input (keyup)="keyUpInput($event)" [(ngModel)] = "scriptName" value="{{scriptName}}" class="typeahead tt-input" type="text" placeholder="Script Name, Like Goo..." autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
+        <input (keyup)="keyUpInput($event)" (keydown)="keyEntered($event)" [(ngModel)] = "scriptName" value="{{scriptName}}" class="typeahead tt-input" type="text" placeholder="Script Name, Like Goo..." autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top; background-color: transparent;">
            <a><i (click)="addScript($event)" class="fa fa-plus-circle fa-4 add-icon" aria-hidden="true"></i></a>
            <a><i class="fa fa-times fa-4 add-icon hide" aria-hidden="true"></i></a>
 

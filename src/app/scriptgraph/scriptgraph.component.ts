@@ -75,7 +75,7 @@ export class ScriptgraphComponent implements OnInit {
   createChrat(data) {
 
     //this.timeData.reverse();
-    let ctx = document.getElementById(this.scriptCode);
+    let ctx = document.getElementById('canvas-' + this.scriptCode);
     let myChart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -132,6 +132,9 @@ export class ScriptgraphComponent implements OnInit {
           }
       }
     });
+
+    this.timeData.reverse();
+    this.graphData.reverse();
   }
 
 }

@@ -118,4 +118,8 @@ export class SuggestionComponent implements OnInit, OnChanges {
     return codeList;
   }
 
+  addHighLight(event, falg) {
+    falg ? event.currentTarget.classList.add('selection-highlight') : event.currentTarget.classList.remove('selection-highlight');
+  }
+
 }

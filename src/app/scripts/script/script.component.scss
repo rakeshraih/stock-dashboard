@@ -54,13 +54,6 @@
   top: 15%;
   z-index: 10;
 
-  .graph-holder{
-    display: block;
-  }
-
-  .closeExpand{
-    display:block;
-  }
 
   .icon-holder-close{
     margin-top: 20px;
@@ -72,10 +65,6 @@
 
   .allign-center{
     transform: none;
-  }
-
-  .overlay {
-    display: block;
   }
 
   .script-top{
@@ -91,11 +80,11 @@
     }
   }
 
-  .display-large-only{
+  .display-large-only,.overlay,.graph-holder,.closeExpand{
     display:block;
   }
 
-  .display-small-only{
+  .display-small-only,.side-highlight{
     display:none;
   }
 }
@@ -144,7 +133,7 @@
 }
 
 .red{
-  color: red;
+  color: #b30000;
 }
 
 .green{
@@ -189,4 +178,19 @@
   .grid-item{
     float: none;
   }
+}
+.side-highlight{
+  height: 200px;
+  width: 4px;
+  position: absolute;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.script-title{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
