@@ -40,17 +40,17 @@ export class ScriptComponent implements OnInit, OnDestroy {
       if ( this.pageVisible) {this.getScript(); }
     }, 60000);
 
-    // this.timerDummy = setInterval(_ => {
-    //   if ( this.pageVisible && (Math.random() < 0.5 ? true : false)) {
-    //     const addSubstract = Math.random() < 0.5 ? true : false;
-    //     const randomNumber = (this.script.high - this.script.low) / 20;
-    //     this.script.close = addSubstract ? this.script.close - randomNumber : this.script.close + randomNumber;
-    //     this.script.high = this.script.high < this.script.close ? this.script.close : this.script.high;
-    //     this.script.low = this.script.low > this.script.close ? this.script.close : this.script.high;
-    //     const volume = Math.random() < 0.5 ? (this.script.close * 1000) + this.script.volume : this.script.volume - (this.script.close * 1000);
-    //     this.script.volume = Math.round(volume);
-    //   }
-    // }, 1000);
+    this.timerDummy = setInterval(_ => {
+      if ( this.pageVisible && (Math.random() < 0.5 ? true : false)) {
+        const addSubstract = Math.random() < 0.5 ? true : false;
+        const randomNumber = (this.script.high - this.script.low) / 20;
+        this.script.close = addSubstract ? this.script.close - randomNumber : this.script.close + randomNumber;
+        this.script.high = this.script.high < this.script.close ? this.script.close : this.script.high;
+        this.script.low = this.script.low > this.script.close ? this.script.close : this.script.high;
+        const volume = Math.random() < 0.5 ? (Math.round(randomNumber * 1000) + this.script.volume) : (this.script.volume - Math.round(randomNumber * 1000));
+        this.script.volume = Math.round(volume);
+      }
+    }, 1000);
 
 
     this.classPriceChnage =  ( this.script.previousClose < this.script.close ) ? 'green' : 'red';
@@ -71,6 +71,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
    closeTheScript(event, scriptCode) {
      event.target.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
      clearInterval(this.timer);
+     clearInterval(this.timerDummy);
      //this.close.emit(null);
      this.deleteLocalStorageScript();
      event.preventDefault();

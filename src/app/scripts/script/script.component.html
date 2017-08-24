@@ -19,7 +19,7 @@
     <div><span>Low :</span><span>{{script.low ? script.low.toFixed(2) : 0}}</span></div>
     <div class="display-large-only"><span>Open :</span><span>{{script.open ? script.open.toFixed(2) : 0}}</span></div>
   </div>
-  <div class="display-large-only"><span>Volume : {{script.volume}}</span></div>
+  <div class="display-large-only"><span>Volume : {{script.volume ? script.volume : 0}}</span></div>
 
   <app-scriptgraph [scriptCode]="script.code" class="graph-holder"></app-scriptgraph>
 
