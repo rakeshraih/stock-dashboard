@@ -1,4 +1,4 @@
-<div class="{{className}}">
+<div class="{{className}}" draggable="true" id="{{script.code}}" (drop)="drop($event)" (dragstart)="drag($event)" (dragover)="allowDrop($event)">
   <div class="script-top">
     <div style="text-align: left;">
       <span class="last-refreshed hide"> {{script.lastRefreshed}} </span>

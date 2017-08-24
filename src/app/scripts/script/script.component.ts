@@ -127,4 +127,24 @@ export class ScriptComponent implements OnInit, OnDestroy {
      return -1;
    }
 
+   drop(ev) {
+    //alert(1);
+     ev.preventDefault();
+     const data = ev.dataTransfer.getData('text');
+     //ev.target.appendChild(document.getElementById(data));
+     //ev.currentTarget.parentNode.parentNode.prepend(document.getElementById(data));
+
+     ev.currentTarget.parentNode.parentNode.parentNode.insertBefore(document.getElementById(data).parentNode.parentNode, ev.currentTarget.parentNode.parentNode.nextSibling);
+
+
+   }
+
+   drag(ev) {
+     ev.dataTransfer.setData('text', ev.target.id);
+   }
+
+   allowDrop(ev) {
+     //alert(1);
+     ev.preventDefault();
+   }
 }
