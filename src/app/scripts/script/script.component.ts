@@ -1,18 +1,20 @@
-import {Component, OnInit, Input, Output, OnDestroy} from '@angular/core';
+import {Component, OnInit, Input, Output, OnDestroy, OnChanges} from '@angular/core';
 import { EventEmitter} from '@angular/core';
 import { Script } from '../script';
 import { Http } from '@angular/http';
 import {ScriptsService} from '../scripts.service';
 import {Observable} from 'rxjs/Observable';
+import {CommonUtilityService} from '../../common-utility.service';
 
  @Component({
   selector: 'app-script',
   templateUrl: './script.component.html',
   styleUrls: ['./script.component.scss']
 })
-export class ScriptComponent implements OnInit, OnDestroy {
+export class ScriptComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() script: Script;
+  @Input() demoTick: Boolean;
   @Output() close = new EventEmitter();
   @Output() showOverLay = new EventEmitter();
   @Output() lastRefreshedToParent = new EventEmitter();
@@ -25,7 +27,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
   classPriceChnage: String = '';
   pageVisible: Boolean = true;
 
-  constructor(private http: Http, private scriptsService: ScriptsService) {
+  constructor(private http: Http, private scriptsService: ScriptsService, private common: CommonUtilityService) {
     const randomClass = Math.round(Math.random() * 10) % 7;
     this.className = 'grid-item grid-item--height2 container-layout ' + this.classList[randomClass];
   }
@@ -41,7 +43,7 @@ export class ScriptComponent implements OnInit, OnDestroy {
     }, 60000);
 
     this.timerDummy = setInterval(_ => {
-      if ( this.pageVisible && (Math.random() < 0.5 ? true : false)) {
+      if ( this.pageVisible && (Math.random() < 0.5 ? true : false) && this.demoTick) {
         const addSubstract = Math.random() < 0.5 ? true : false;
         const randomNumber = (this.script.high - this.script.low) / 20;
         this.script.close = addSubstract ? this.script.close - randomNumber : this.script.close + randomNumber;
@@ -49,6 +51,8 @@ export class ScriptComponent implements OnInit, OnDestroy {
         this.script.low = this.script.low > this.script.close ? this.script.close : this.script.high;
         const volume = Math.random() < 0.5 ? (Math.round(randomNumber * 1000) + this.script.volume) : (this.script.volume - Math.round(randomNumber * 1000));
         this.script.volume = Math.round(volume);
+        this.lastRefreshedToParent.emit(this.common.formatAMPM(new Date()));
+
       }
     }, 1000);
 
@@ -63,6 +67,10 @@ export class ScriptComponent implements OnInit, OnDestroy {
         this.pageVisible = true;
       }
     });
+    }
+
+    ngOnChanges() {
+
     }
     ngOnDestroy() {
 

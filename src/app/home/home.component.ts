@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   searching = '';
   overLayClass = false;
   lastRefreshed: String = '';
-  demoTick: Boolean = false;
+  demoTick: Boolean = true;
   constructor(private http: HttpClient, private scriptsService: ScriptsService, private common: CommonUtilityService) {
     // this.scriptName = 'test';
     // this.scriptCode = 'MSFT';
@@ -26,6 +26,9 @@ export class HomeComponent implements OnInit {
     this.lastRefreshed = this.common.formatAMPM(new Date());
   }
 
+  demoTickFn(): void{
+    this.demoTick = !this.demoTick;
+  }
   ngOnInit() {
   }
 
@@ -83,6 +86,7 @@ export class HomeComponent implements OnInit {
   }
 
   lastRefreshedTime(timeStamp: String) {
+    //alert(timeStamp);
     this.lastRefreshed = timeStamp;
   }
 

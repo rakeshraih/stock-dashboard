@@ -11,6 +11,8 @@ import { ScriptComponent} from './script/script.component';
 export class ScriptsComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() scriptsList;
+  @Input() demoTick;
+
   @ViewChild('scriptContainer', { read: ViewContainerRef }) container;
   @Output() showOverLay = new EventEmitter();
   @Output() lastRefreshedToParent = new EventEmitter();
