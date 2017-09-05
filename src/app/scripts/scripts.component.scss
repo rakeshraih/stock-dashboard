@@ -52,10 +52,17 @@
   justify-content: space-between;
 }
 
+.grid:last-child{
+  margin-bottom: 60px;
+}
 
 @media only screen and (max-device-width: 480px) {
   .grid-item--width2 { width: 100%; }
   .grid-item--width3 { width: 100%; }
   .grid-item--width4 { width: 100%; }
+
+  .grid:last-child{
+    margin-bottom: 80px;
+  }
 
 }
