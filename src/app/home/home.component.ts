@@ -18,6 +18,11 @@ export class HomeComponent implements OnInit {
   overLayClass = false;
   lastRefreshed: String = '';
   demoTick: Boolean = true;
+  defaultScriptList = [{'code' : 'AAPL', 'name' : 'Apple(AAPL)', 'scriptFullName' : 'Apple Inc.'}, {'code' : 'GOOG', 'name' : 'Alphabet(GOOG)', 'scriptFullName' : 'Alphabet Inc.'}, {'code' : 'COST', 'name' : 'Costco(COST)', 'scriptFullName' : ' Costco Wholesale Corporation'}, {'code' : 'AMZN', 'name' : 'Amazon.com,(AMZN)', 'scriptFullName' : ' Amazon.com, Inc.'}, {'code' : 'TSLA', 'name' : 'Tesla,(TSLA)', 'scriptFullName' : 'Tesla, Inc.'}, {'code' : 'F', 'name' : 'Ford(F)', 'scriptFullName' : 'Ford Motor Corporation'}, {'code' : 'V', 'name' : 'Visa(V)', 'scriptFullName' : 'Visa, Inc.'}, {'code' : 'TWTR', 'name' : 'Twitter,(TWTR)', 'scriptFullName' : 'Twitter, Inc.'}, {'code' : 'NFLX', 'name' : 'Netflix,(NFLX)', 'scriptFullName' : ' Netflix, Inc.'}
+    , {'code' : 'COKE', 'name' : 'Coca-Cola Bottling Co(COKE)', 'scriptFullName' : 'Coca-Cola Bottling Co.'}, {'code' : 'WMT', 'name' : 'Wal-Mart Stores, Inc.(WMT)', 'scriptFullName' : 'Wal-Mart Stores, Inc.'}
+    , {'code' : 'BAC', 'name' : 'Bank of America Corporation(BAC)', 'scriptFullName' : 'Bank of America Corporation'}
+    , {'code' : 'INTC', 'name' : 'Intel Corporation(INTC)', 'scriptFullName' : 'Intel Corporation'}];
+
   constructor(private http: HttpClient, private scriptsService: ScriptsService, private common: CommonUtilityService) {
     // this.scriptName = 'test';
     // this.scriptCode = 'MSFT';
@@ -26,7 +31,7 @@ export class HomeComponent implements OnInit {
     this.lastRefreshed = this.common.formatAMPM(new Date());
   }
 
-  demoTickFn(): void{
+  demoTickFn(): void {
     this.demoTick = !this.demoTick;
   }
   ngOnInit() {
@@ -64,15 +69,18 @@ export class HomeComponent implements OnInit {
 
   clearForm($event) {
     this.scriptName = '';
+    setTimeout(function() {
+      document.getElementById('script-input').focus();
+    }, 500);
   }
 
   getScriptListFromLocal() {
     const data = localStorage.getItem('stock-dashboard');
     if (data) {
       const jsonData = JSON.parse(data);
-      this.scriptsList = ( jsonData.length > 0 ) ? jsonData :  [{'code' : 'AAPL', 'name' : 'Apple(AAPL)', 'scriptFullName' : 'Apple Inc.'}, {'code' : 'GOOG', 'name' : 'Alphabet(GOOG)', 'scriptFullName' : 'Alphabet Inc.'}, {'code' : 'COST', 'name' : 'Costco(COST)', 'scriptFullName' : ' Costco Wholesale Corporation'}, {'code' : 'AMZN', 'name' : 'Amazon.com,(AMZN)', 'scriptFullName' : ' Amazon.com, Inc.'}, {'code' : 'TSLA', 'name' : 'Tesla,(TSLA)', 'scriptFullName' : 'Tesla, Inc.'}, {'code' : 'F', 'name' : 'Ford(F)', 'scriptFullName' : 'Ford Motor Corporation'}, {'code' : 'V', 'name' : 'Visa(V)', 'scriptFullName' : 'Visa, Inc.'}, {'code' : 'TWTR', 'name' : 'Twitter,(TWTR)', 'scriptFullName' : 'Twitter, Inc.'}, {'code' : 'NFLX', 'name' : 'Netflix,(NFLX)', 'scriptFullName' : ' Netflix, Inc.'}];
+      this.scriptsList = ( jsonData.length > 0 ) ? jsonData :  this.defaultScriptList;
     }else {
-      this.scriptsList = [{'code' : 'AAPL', 'name' : 'Apple(AAPL)', 'scriptFullName' : 'Apple Inc.'}, {'code' : 'GOOG', 'name' : 'Alphabet(GOOG)', 'scriptFullName' : 'Alphabet Inc.'}, {'code' : 'COST', 'name' : 'Costco(COST)', 'scriptFullName' : ' Costco Wholesale Corporation'}, {'code' : 'AMZN', 'name' : 'Amazon.com,(AMZN)', 'scriptFullName' : ' Amazon.com, Inc.'}, {'code' : 'TSLA', 'name' : 'Tesla,(TSLA)', 'scriptFullName' : 'Tesla, Inc.'}, {'code' : 'F', 'name' : 'Ford(F)', 'scriptFullName' : 'Ford Motor Corporation'}, {'code' : 'V', 'name' : 'Visa(V)', 'scriptFullName' : 'Visa, Inc.'}, {'code' : 'TWTR', 'name' : 'Twitter,(TWTR)', 'scriptFullName' : 'Twitter, Inc.'}, {'code' : 'NFLX', 'name' : 'Netflix,(NFLX)', 'scriptFullName' : ' Netflix, Inc.'}];
+      this.scriptsList = this.defaultScriptList;
     }
   }
 

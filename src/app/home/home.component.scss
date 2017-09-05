@@ -114,3 +114,7 @@ body { font-family: sans-serif; }
   height: auto !important;
   width: auto !important;
 }
+
+#script-input:focus{
+  border: 2px solid darkblue;
+}
