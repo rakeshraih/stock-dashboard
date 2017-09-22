@@ -43,7 +43,7 @@ export class ScriptsService {
   private extractData(res: Response) {
     const body = res;
     if ( res.hasOwnProperty('Error Message') ) {
-      alert(res['Error Message']);
+      console.log(res['Error Message']);
     }
     return body || {};
   }
